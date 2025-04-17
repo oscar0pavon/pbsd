@@ -16,6 +16,21 @@ Creating the usb image:
 
     ./build.sh -U -u -j32 -m amd64 -O ./build install-image
 
+Step by step:
+Build time is messure with 32 threads
+
+Tools:
+
+    ./build.sh -U -u -j32 -m amd64 -O ./build tools
+
+Took 4 min
+
+Kernel:
+
+    ./build.sh -U -u -j32 -m amd64 -O ./build kernel=MYKERNEL
+
+Took 1 min
+
 
 Development
 --------------
