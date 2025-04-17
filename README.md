@@ -1,56 +1,24 @@
-NetBSD
+pBSD
 ======
 
-NetBSD is a free, fast, secure, and highly portable Unix-like Open
-Source operating system.  It is available for a [wide range of
-platforms](https://wiki.NetBSD.org/ports/), from large-scale servers
-and powerful desktop systems to handheld and embedded devices.
+Operating System based on NetBSD
 
 Building
 --------
 
 You can cross-build NetBSD from most UNIX-like operating systems.
-To build for amd64 (x86_64), in the src directory:
 
-    ./build.sh -U -u -j4 -m amd64 -O ~/obj release
+    ./build.sh -U -u -j32 -m amd64 -O ./build release
 
-Additional build information available in the [BUILDING](BUILDING) file.
+With 32 thread the time of building is 14 minutes
 
-Binaries
---------
+Creating the usb image:
 
-- [Daily builds](https://nycdn.NetBSD.org/pub/NetBSD-daily/HEAD/latest/)
-- [Releases](https://cdn.NetBSD.org/pub/NetBSD/)
+    ./build.sh -U -u -j32 -m amd64 -O ./build install-image
 
-Testing
--------
 
-On a running NetBSD system:
-
-    cd /usr/tests; atf-run | atf-report
-
-Troubleshooting
----------------
-
-- Send bugs and patches [via web form](https://www.NetBSD.org/cgi-bin/sendpr.cgi?gndb=netbsd).
-- Subscribe to the [mailing lists](https://www.NetBSD.org/mailinglists/).
-  The [netbsd-users](https://www.NetBSD.org/mailinglists/#netbsd-users) list is a good choice for many problems; watch [current-users](https://www.NetBSD.org/mailinglists/#current-users) if you follow the bleeding edge of NetBSD-current.
-- Join the community IRC channel [#netbsd @ libera.chat](https://web.libera.chat/#netbsd).
-
-Latest sources
+Development
 --------------
 
-To fetch the main CVS repository:
+    git clone https://github.com/oscar0pavon/pbsd.git
 
-    cvs -d anoncvs@anoncvs.NetBSD.org:/cvsroot checkout -P src
-
-To work in the Git mirror, which is updated every few hours from CVS:
-
-    git clone https://github.com/NetBSD/src.git
-
-Additional Links
-----------------
-
-- [The NetBSD Guide](https://www.NetBSD.org/docs/guide/en/)
-- [NetBSD manual pages](https://man.NetBSD.org/)
-- [NetBSD Cross-Reference](https://nxr.NetBSD.org/)
