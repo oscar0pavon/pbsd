@@ -2,3 +2,5 @@ tools/
 obj/
 NvVars
 *.EFI
+virtual_machine/disk.raw
+virtual_machine/disk/netbsd
