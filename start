@@ -2,7 +2,7 @@
 
 qemu-system-x86_64 -enable-kvm -bios ./virtual_machine/uefi.bios\
   -cdrom ./obj/releasedir/amd64/installation/cdrom/boot.iso \
-  -hda ./virtual_machine/disk.raw \
+  -drive file=./virtual_machine/disk.raw,format=raw,media=disk \
   -device qemu-xhci,id=xhci \
   -m 1G
   #-drive file=fat:rw:./virtual_machine/disk/,format=raw,media=disk\
