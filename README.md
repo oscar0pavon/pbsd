@@ -62,6 +62,24 @@ Mount partitions
     mount /dev/rdk0 /mnt/boot
     mount /dev/rdk1 /mnt/root
 
+Install bootloader:
+    
+    mkdir -p /mnt/boot/EFI/BOOT/
+    cp /usr/mdec/bootx64.efi /mnt/boot/EFI/BOOT/BOOTX64.EFI
+
+Install kernel:
+
+    cd amd64/binary/sets
+    tar -xvzpf kern-GENERIC.tar.xz -C /mnt/root
+
+The bootloader find /netbsd in the root partition not in the EFI partition
+
+Install system:
+
+    cd amd64/binary/sets
+    tar -xvzpf base.tar.xz -C /mnt/root/
+    tar -xvzpf etc.tar.xz -C /mnt/root/
+
 
 Development
 --------------
