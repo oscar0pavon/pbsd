@@ -1,8 +1,36 @@
 #!/bin/sh
+qemu='qemu-system-x86_64 -enable-kvm -bios ./virtual_machine/uefi.bios'
 
-qemu-system-x86_64 -enable-kvm -bios ./virtual_machine/uefi.bios\
+if [ -z "$1" ]
+then
+  echo "No argument
+  Available:
+  usb
+  iso"
+  exit
+fi
+
+if [ $1 == 'efi' ]; then
+  qemu-system-x86_64 -enable-kvm -bios ./virtual_machine/uefi.bios \
+  -m 1G \
+  -drive file=fat:rw:./virtual_machine/disk/,format=raw,media=disk
+fi
+
+
+if [ $1 == 'iso' ]; then
+  qemu-system-x86_64 -enable-kvm -bios ./virtual_machine/uefi.bios \
   -cdrom ./obj/releasedir/amd64/installation/cdrom/boot.iso \
   -drive file=./virtual_machine/disk.raw,format=raw,media=disk \
   -device qemu-xhci,id=xhci \
   -m 1G
-  #-drive file=fat:rw:./virtual_machine/disk/,format=raw,media=disk\
+fi
+
+if [ $1 == 'usb' ]; then
+  qemu-system-x86_64 -enable-kvm -bios ./virtual_machine/uefi.bios \
+  -m 2G \
+  -drive if=none,id=usbstick,format=raw,file=./obj/releasedir/images/NetBSD-10.99.14-amd64-install.img   \
+  -usb                                                        \
+  -device usb-ehci,id=ehci                                    \
+  -device usb-storage,bus=ehci.0,drive=usbstick \
+  -drive file=./virtual_machine/disk.raw,format=raw,media=disk 
+fi
