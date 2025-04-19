@@ -3,11 +3,7 @@ qemu='qemu-system-x86_64 -enable-kvm -bios ./virtual_machine/uefi.bios'
 
 if [ -z "$1" ]
 then
-  echo "No argument
-  Available:
-  usb
-  iso"
-  exit
+  echo none
 fi
 
 if [ $1 == 'efi' ]; then
@@ -33,4 +29,11 @@ if [ $1 == 'usb' ]; then
   -device usb-ehci,id=ehci                                    \
   -device usb-storage,bus=ehci.0,drive=usbstick \
   -drive file=./virtual_machine/disk.raw,format=raw,media=disk 
+fi
+
+if [ $1 == 'n' ]; then
+  qemu-system-x86_64 -enable-kvm -bios ./virtual_machine/uefi.bios \
+  -m 12G \
+  -drive file=./virtual_machine/disk.raw,format=raw,if=none,id=nvm \
+  -device nvme,serial=deadbeef,drive=nvm
 fi
